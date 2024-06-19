@@ -1,18 +1,22 @@
 import 'package:dio/dio.dart';
+import 'package:films_app/repository/abstracts/abstracts_repository.dart';
 import 'package:films_app/repository/models/top_films/topfilms.dart';
 
-class ApiService {
+class TopFilmsRepository implements AbstractTopFilmsRep {
+  final Dio dio;
   static const String apiKey = 'cc8b4852-3a5c-441c-82e3-f67e5eb33fea';
-  Dio dioA = Dio(
-    BaseOptions(
-      headers: {"X-API-KEY": apiKey},
-    ),
+  final Options _options = Options(
+    headers: {"X-API-KEY": apiKey},
   );
+
+  TopFilmsRepository({required this.dio});
+  @override
   Future<List<TopFilms>> getTopFilmsList() async {
     // лист из топ 10 фильмов
     try {
-      Response response = await dioA.get(
-          'https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_POPULAR_MOVIES&page=1');
+      Response response = await dio.get(
+          'https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_POPULAR_MOVIES&page=1',
+          options: _options);
       List<TopFilms> films = (response.data['items'] as List)
           .map((json) => TopFilms.fromJson(json))
           .toList();

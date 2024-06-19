@@ -1,8 +1,10 @@
 import 'package:films_app/pages/pages.dart';
+import 'package:films_app/repository/di/di_container.dart';
 import 'package:films_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  setup();
   runApp(const MovieApp());
 }
 
