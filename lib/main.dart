@@ -13,6 +13,7 @@ class MovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: lightTheme,
+      debugShowCheckedModeBanner: false,
       home: const HomePage(),
     );
   }
