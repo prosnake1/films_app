@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:films_app/repository/abstracts/abstracts_repository.dart';
 import 'package:films_app/repository/models/searched_films/searchedfilm.dart';
 import 'package:films_app/repository/models/searched_films/searchedfilms.dart';
 import 'package:films_app/repository/singleton/keyword.dart';
 import 'package:get_it/get_it.dart';
 
-class SearchedFilmsRepository {
+class SearchedFilmsRepository implements AbstractSearchedFilmsRep {
   final Dio dio = Dio();
 
   static const String apiKey = 'cc8b4852-3a5c-441c-82e3-f67e5eb33fea';
@@ -13,6 +14,7 @@ class SearchedFilmsRepository {
       "X-API-KEY": apiKey,
     },
   );
+  @override
   Future<List<SearchedFilms>> getFilmsList() async {
     try {
       final KeywordSingleton keywordSingleton = GetIt.I.get<KeywordSingleton>();
