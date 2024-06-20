@@ -1,6 +1,8 @@
 import 'package:films_app/repository/dio/searched_films_rep.dart';
 import 'package:films_app/repository/models/searched_films/searchedfilms.dart';
+import 'package:films_app/repository/singleton/keyword.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -10,6 +12,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  KeywordSingleton keywordSingleton = GetIt.I.get<KeywordSingleton>();
   final controller = TextEditingController();
   List<SearchedFilms> searchedFilms = [];
   @override
@@ -39,6 +42,11 @@ class _SearchPageState extends State<SearchPage> {
         children: [
           TextField(
             controller: controller,
+            onSubmitted: (value) {
+              String text = controller.text;
+              keywordSingleton.updateValue(text);
+              getFilmsList();
+            },
           ),
         ],
       ),

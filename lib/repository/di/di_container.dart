@@ -9,5 +9,5 @@ GetIt locator = GetIt.instance;
 void setup() {
   locator
       .registerSingleton<AbstractTopFilmsRep>(TopFilmsRepository(dio: Dio()));
-  locator.registerSingleton<KeywordSingleton>(KeywordSingleton('мстители'));
+  locator.registerSingleton<KeywordSingleton>(KeywordSingleton(''));
 }
