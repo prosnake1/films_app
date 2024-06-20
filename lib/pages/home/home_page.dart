@@ -1,5 +1,5 @@
-import 'package:films_app/pages/home_page/bloc/top_films_bloc.dart';
-import 'package:films_app/pages/home_page/widgets/widgets.dart';
+import 'package:films_app/pages/home/bloc/top_films_bloc.dart';
+import 'package:films_app/pages/home/widgets/widgets.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
 import 'package:films_app/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -33,16 +33,26 @@ class _HomePageState extends State<HomePage> {
         children: [
           FilmsColumn(topFilmsBloc: _topFilmsBloc),
           SizedBox(
-            height: 300,
+            height: 200,
             child: Column(
               children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/search');
+                  },
+                  style: lightTheme.elevatedButtonTheme.style,
+                  child: const Text('Перейти к поиску'),
+                ),
                 const SizedBox(
                   height: 50,
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text('Перейти к поиску'),
                   style: lightTheme.elevatedButtonTheme.style,
+                  child: const Text('Перейти к коллекции'),
                 ),
               ],
             ),

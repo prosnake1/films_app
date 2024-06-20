@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
-import 'package:films_app/repository/models/top_films/topfilms.dart';
+import 'package:films_app/repository/models/top_films/film.dart';
 
 class TopFilmsRepository implements AbstractTopFilmsRep {
   final Dio dio;
@@ -11,14 +11,14 @@ class TopFilmsRepository implements AbstractTopFilmsRep {
 
   TopFilmsRepository({required this.dio});
   @override
-  Future<List<TopFilms>> getTopFilmsList() async {
+  Future<List<Film>> getTopFilmsList() async {
     // лист из топ 10 фильмов
     try {
       Response response = await dio.get(
           'https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_POPULAR_MOVIES&page=1',
           options: _options);
-      List<TopFilms> films = (response.data['items'] as List)
-          .map((json) => TopFilms.fromJson(json))
+      List<Film> films = (response.data['items'] as List)
+          .map((json) => Film.fromJson(json))
           .toList();
       if (films.length > 10) {
         for (int i = films.length - 10; i > 0; i--) {

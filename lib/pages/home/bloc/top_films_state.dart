@@ -6,5 +6,5 @@ class TopFilmsInitial extends TopFilmsState {}
 
 class FilmsListLoaded extends TopFilmsState {
   FilmsListLoaded({required this.filmsList});
-  final List<TopFilms> filmsList;
+  final List<Film> filmsList;
 }

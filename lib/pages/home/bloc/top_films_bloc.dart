@@ -1,5 +1,5 @@
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
-import 'package:films_app/repository/models/top_films/topfilms.dart';
+import 'package:films_app/repository/models/top_films/film.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'top_films_event.dart';

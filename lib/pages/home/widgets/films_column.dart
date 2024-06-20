@@ -1,4 +1,5 @@
-import 'package:films_app/pages/home_page/bloc/top_films_bloc.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:films_app/pages/home/bloc/top_films_bloc.dart';
 import 'package:films_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,8 +36,8 @@ class FilmsColumn extends StatelessWidget {
                             child: Text('${i + 1}',
                                 style: lightTheme.textTheme.labelLarge)),
                       ),
-                      Image.network(
-                        film.posterUrl,
+                      CachedNetworkImage(
+                        imageUrl: film.posterUrl,
                         width: MediaQuery.of(context).size.width / 3.5,
                         height: MediaQuery.of(context).size.height / 5,
                       ),

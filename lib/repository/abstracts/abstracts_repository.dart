@@ -1,5 +1,5 @@
-import 'package:films_app/repository/models/top_films/topfilms.dart';
+import 'package:films_app/repository/models/top_films/film.dart';
 
 abstract class AbstractTopFilmsRep {
-  Future<List<TopFilms>> getTopFilmsList();
+  Future<List<Film>> getTopFilmsList();
 }
