@@ -1,8 +1,13 @@
-import 'package:films_app/repository/dio/searched_films_rep.dart';
-import 'package:films_app/repository/models/searched_films/searchedfilms.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:films_app/repository/abstracts/abstracts_repository.dart';
 import 'package:films_app/repository/singleton/keyword.dart';
+import 'package:films_app/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+
+import 'bloc/searched_films_bloc.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -12,19 +17,10 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final _searchedFilmsBloc =
+      SearchedFilmsBloc(GetIt.I<AbstractSearchedFilmsRep>());
   KeywordSingleton keywordSingleton = GetIt.I.get<KeywordSingleton>();
   final controller = TextEditingController();
-  List<SearchedFilms> searchedFilms = [];
-  @override
-  void initState() {
-    getFilmsList();
-    super.initState();
-  }
-
-  void getFilmsList() async {
-    searchedFilms = await SearchedFilmsRepository().getFilmsList();
-    setState(() {});
-  }
 
   @override
   void dispose() {
@@ -45,9 +41,54 @@ class _SearchPageState extends State<SearchPage> {
             onSubmitted: (value) {
               String text = controller.text;
               keywordSingleton.updateValue(text);
-              getFilmsList();
+              _searchedFilmsBloc.add(LoadFilmsList());
             },
           ),
+          BlocBuilder<SearchedFilmsBloc, SearchedFilmsState>(
+            bloc: _searchedFilmsBloc,
+            builder: (context, state) {
+              if (state is LoadedFilmsList) {
+                return Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.films[0].films.length,
+                    itemBuilder: (context, i) {
+                      final film = state.films[0].films[i];
+                      return SizedBox(
+                        child: Row(
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: film.posterUrl,
+                              width: MediaQuery.of(context).size.width / 3.5,
+                              height: MediaQuery.of(context).size.height / 5,
+                            ),
+                            Flexible(
+                              fit: FlexFit.tight,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    film.nameRu ?? 'No Name',
+                                    style: lightTheme.textTheme.labelLarge,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(film.year.toString(),
+                                      style: lightTheme.textTheme.labelLarge),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          )
         ],
       ),
     );
