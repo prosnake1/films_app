@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:films_app/pages/search/widgets/film_box.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
 import 'package:films_app/repository/singleton/keyword.dart';
-import 'package:films_app/theme/theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,50 +44,46 @@ class _SearchPageState extends State<SearchPage> {
               _searchedFilmsBloc.add(LoadFilmsList());
             },
           ),
-          BlocBuilder<SearchedFilmsBloc, SearchedFilmsState>(
-            bloc: _searchedFilmsBloc,
-            builder: (context, state) {
-              if (state is LoadedFilmsList) {
-                return Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: state.films[0].films.length,
-                    itemBuilder: (context, i) {
-                      final film = state.films[0].films[i];
-                      return SizedBox(
-                        child: Row(
-                          children: [
-                            CachedNetworkImage(
-                              imageUrl: film.posterUrl,
-                              width: MediaQuery.of(context).size.width / 3.5,
-                              height: MediaQuery.of(context).size.height / 5,
-                            ),
-                            Flexible(
-                              fit: FlexFit.tight,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    film.nameRu ?? 'No Name',
-                                    style: lightTheme.textTheme.labelLarge,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  Text(film.year.toString(),
-                                      style: lightTheme.textTheme.labelLarge),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+          Expanded(
+            child: BlocBuilder<SearchedFilmsBloc, SearchedFilmsState>(
+              bloc: _searchedFilmsBloc,
+              builder: (context, state) {
+                if (state is LoadedFilmsList) {
+                  return Expanded(
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) => Divider(),
+                      shrinkWrap: true,
+                      itemCount: state.films[0].films.length,
+                      itemBuilder: (context, i) {
+                        final film = state.films[0].films[i];
+                        return SizedBox(
+                          child: buildFilmBox(film, context),
+                        );
+                      },
+                    ),
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
-              }
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            },
+              },
+            ),
+          ),
+          Container(
+            alignment: Alignment.bottomCenter,
+            color: Colors.grey.shade300,
+            height: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                    onPressed: () {},
+                    child: const Icon(Icons.chevron_left_outlined)),
+                TextButton(
+                    onPressed: () {},
+                    child: const Icon(Icons.chevron_right_outlined))
+              ],
+            ),
           )
         ],
       ),
