@@ -1,7 +1,7 @@
 class KeywordSingleton {
   String keyword;
-  void updateValue(String newValue) {
-    keyword = newValue;
+  void updateValue(String value) {
+    keyword = value;
   }
 
   KeywordSingleton(this.keyword);

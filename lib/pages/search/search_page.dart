@@ -1,9 +1,8 @@
 import 'package:films_app/pages/search/widgets/film_box.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
-import 'package:films_app/repository/singleton/keyword.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:films_app/repository/singletons/currentpage.dart';
+import 'package:films_app/repository/singletons/keyword.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -20,6 +19,8 @@ class _SearchPageState extends State<SearchPage> {
   final _searchedFilmsBloc =
       SearchedFilmsBloc(GetIt.I<AbstractSearchedFilmsRep>());
   KeywordSingleton keywordSingleton = GetIt.I.get<KeywordSingleton>();
+  CurrentPageSingleton currentPageSingleton =
+      GetIt.I.get<CurrentPageSingleton>();
   final controller = TextEditingController();
 
   @override
@@ -51,7 +52,7 @@ class _SearchPageState extends State<SearchPage> {
                 if (state is LoadedFilmsList) {
                   return Expanded(
                     child: ListView.separated(
-                      separatorBuilder: (context, index) => Divider(),
+                      separatorBuilder: (context, index) => const Divider(),
                       shrinkWrap: true,
                       itemCount: state.films[0].films.length,
                       itemBuilder: (context, i) {
@@ -77,10 +78,19 @@ class _SearchPageState extends State<SearchPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _searchedFilmsBloc.add(LoadFilmsList());
+                      currentPageSingleton.previousPage();
+                      setState(() {});
+                    },
                     child: const Icon(Icons.chevron_left_outlined)),
+                Text(currentPageSingleton.page.toString()),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _searchedFilmsBloc.add(LoadFilmsList());
+                      currentPageSingleton.nextPage();
+                      setState(() {});
+                    },
                     child: const Icon(Icons.chevron_right_outlined))
               ],
             ),
