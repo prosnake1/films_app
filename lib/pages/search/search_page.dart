@@ -1,7 +1,5 @@
 import 'package:films_app/pages/search/widgets/film_box.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
-import 'package:films_app/repository/singletons/currentpage.dart';
-import 'package:films_app/repository/singletons/keyword.dart';
 import 'package:films_app/repository/singletons/singleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,6 +59,7 @@ class _SearchPageState extends State<SearchPage> {
                               .get<MovieIdSingleton>()
                               .updateValue(film.filmId);
                           Navigator.of(context).pushNamed('/movie');
+                          setState(() {});
                         },
                         child: buildFilmBox(film, context),
                       );
@@ -73,31 +72,33 @@ class _SearchPageState extends State<SearchPage> {
               );
             },
           ),
-          Container(
-            alignment: Alignment.bottomCenter,
-            color: Colors.grey.shade300,
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                    onPressed: () {
-                      _searchedFilmsBloc.add(LoadFilmsList());
-                      currentPageSingleton.previousPage();
-                      setState(() {});
-                    },
-                    child: const Icon(Icons.chevron_left_outlined)),
-                Text(currentPageSingleton.page.toString()),
-                TextButton(
-                    onPressed: () {
-                      _searchedFilmsBloc.add(LoadFilmsList());
-                      currentPageSingleton.nextPage();
-                      setState(() {});
-                    },
-                    child: const Icon(Icons.chevron_right_outlined))
-              ],
-            ),
-          )
+          (GetIt.I.get<KeywordSingleton>().keyword == '')
+              ? const SizedBox()
+              : Container(
+                  alignment: Alignment.bottomCenter,
+                  color: Colors.grey.shade300,
+                  height: 50,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            _searchedFilmsBloc.add(LoadFilmsList());
+                            currentPageSingleton.previousPage();
+                            setState(() {});
+                          },
+                          child: const Icon(Icons.chevron_left_outlined)),
+                      Text(currentPageSingleton.page.toString()),
+                      TextButton(
+                          onPressed: () {
+                            _searchedFilmsBloc.add(LoadFilmsList());
+                            currentPageSingleton.nextPage();
+                            setState(() {});
+                          },
+                          child: const Icon(Icons.chevron_right_outlined))
+                    ],
+                  ),
+                )
         ],
       ),
     );

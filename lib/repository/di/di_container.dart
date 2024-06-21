@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
+import 'package:films_app/repository/dio/movie_rep.dart';
 import 'package:films_app/repository/dio/searched_films_rep.dart';
 import 'package:films_app/repository/dio/top_films_rep.dart';
 import 'package:films_app/repository/singletons/singleton.dart';
@@ -15,5 +16,7 @@ void setup() {
   locator.registerSingleton<AbstractSearchedFilmsRep>(
       SearchedFilmsRepository(dio: Dio()));
   locator.registerSingleton<PagesCountSingleton>(PagesCountSingleton(0));
-  locator.registerSingleton<MovieIdSingleton>(MovieIdSingleton(305));
+  locator.registerSingleton<MovieIdSingleton>(MovieIdSingleton(0));
+  locator
+      .registerSingleton<AbstractMovieInfoRep>(MovieInfoRepository(dio: Dio()));
 }

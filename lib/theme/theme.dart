@@ -3,6 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 final lightTheme = ThemeData(
   primaryColor: Colors.white,
+  colorScheme: ColorScheme.fromSwatch().copyWith(
+      primary: Colors.black,
+      background: Colors.white,
+      outline: Colors.black,
+      outlineVariant: Colors.grey.shade400),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: TextButton.styleFrom(
       backgroundColor: Colors.white,
@@ -18,13 +23,19 @@ final lightTheme = ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
   ),
+  cardColor: Colors.grey[350],
   textTheme: TextTheme(
-    titleLarge: GoogleFonts.rubik(
-      textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
-    ),
-    labelLarge: GoogleFonts.rubik(
-      textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-    ),
-  ),
+      titleLarge: GoogleFonts.rubik(
+        textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+      ),
+      labelLarge: GoogleFonts.rubik(
+        textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+      ),
+      titleMedium: GoogleFonts.rubik(
+        textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+      ),
+      labelSmall: GoogleFonts.outfit(
+        textStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+      )),
   useMaterial3: true,
 );
