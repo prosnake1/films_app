@@ -1,10 +1,16 @@
+import 'package:films_app/pages/login/login_page.dart';
 import 'package:films_app/pages/pages.dart';
+import 'package:films_app/pages/sign_up/sign_up_page.dart';
 import 'package:films_app/repository/di/di_container.dart';
 import 'package:films_app/theme/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
   setup();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MovieApp());
 }
 
@@ -17,10 +23,14 @@ class MovieApp extends StatelessWidget {
       theme: lightTheme,
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => const HomePage(),
+        '/home': (context) => const HomePage(),
         '/search': (context) => const SearchPage(),
         '/movie': (context) => const MoviePage(),
+        '/login': (context) => const LoginPage(),
+        '/sign-up': (context) => const SignUpPage(),
       },
+      initialRoute:
+          FirebaseAuth.instance.currentUser == null ? '/login' : '/home',
     );
   }
 }
