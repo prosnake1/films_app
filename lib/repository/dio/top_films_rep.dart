@@ -3,13 +3,12 @@ import 'package:films_app/repository/abstracts/abstracts_repository.dart';
 import 'package:films_app/repository/models/top_films/film.dart';
 
 class TopFilmsRepository implements AbstractTopFilmsRep {
+  TopFilmsRepository({required this.dio});
   final Dio dio;
   static const String apiKey = 'cc8b4852-3a5c-441c-82e3-f67e5eb33fea';
   final Options _options = Options(
     headers: {"X-API-KEY": apiKey},
   );
-
-  TopFilmsRepository({required this.dio});
   @override
   Future<List<Film>> getTopFilmsList() async {
     // лист из топ 10 фильмов

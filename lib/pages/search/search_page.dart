@@ -2,6 +2,7 @@ import 'package:films_app/pages/search/widgets/film_box.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
 import 'package:films_app/repository/singletons/currentpage.dart';
 import 'package:films_app/repository/singletons/keyword.dart';
+import 'package:films_app/repository/singletons/singleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -57,6 +58,9 @@ class _SearchPageState extends State<SearchPage> {
                       return InkWell(
                         onTap: () {
                           Navigator.of(context).pushNamed('/movie');
+                          GetIt.I
+                              .get<MovieIdSingleton>()
+                              .updateValue(film.filmId);
                         },
                         child: buildFilmBox(film, context),
                       );
