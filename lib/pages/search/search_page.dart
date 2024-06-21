@@ -57,10 +57,10 @@ class _SearchPageState extends State<SearchPage> {
                       final film = state.films[i];
                       return InkWell(
                         onTap: () {
-                          Navigator.of(context).pushNamed('/movie');
                           GetIt.I
                               .get<MovieIdSingleton>()
                               .updateValue(film.filmId);
+                          Navigator.of(context).pushNamed('/movie');
                         },
                         child: buildFilmBox(film, context),
                       );

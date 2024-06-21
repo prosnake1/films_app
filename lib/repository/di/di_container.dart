@@ -15,5 +15,5 @@ void setup() {
   locator.registerSingleton<AbstractSearchedFilmsRep>(
       SearchedFilmsRepository(dio: Dio()));
   locator.registerSingleton<PagesCountSingleton>(PagesCountSingleton(0));
-  locator.registerSingleton<MovieIdSingleton>(MovieIdSingleton(0));
+  locator.registerSingleton<MovieIdSingleton>(MovieIdSingleton(305));
 }

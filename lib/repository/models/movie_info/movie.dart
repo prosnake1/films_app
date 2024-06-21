@@ -1,5 +1,5 @@
-class Movie {
-  Movie(
+class MovieInfo {
+  MovieInfo(
       {required this.nameRu,
       required this.nameOriginal,
       required this.posterUrl,
@@ -9,11 +9,11 @@ class Movie {
   final String? nameRu;
   final String nameOriginal;
   final String posterUrl;
-  final int ratingKinopoisk;
+  final double? ratingKinopoisk;
   final int year;
-  final String description;
-  factory Movie.fromJson(Map<String, dynamic> json) {
-    return Movie(
+  final String? description;
+  factory MovieInfo.fromJson(Map<String, dynamic> json) {
+    return MovieInfo(
       nameRu: json['nameRu'],
       nameOriginal: json['nameOriginal'],
       posterUrl: json['posterUrl'],
