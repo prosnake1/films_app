@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
 import 'package:films_app/repository/models/searched_films/searchedfilm.dart';
-import 'package:films_app/repository/models/searched_films/searchedfilms.dart';
 import 'package:films_app/repository/singletons/singleton.dart';
 import 'package:get_it/get_it.dart';
 
@@ -17,7 +16,7 @@ class SearchedFilmsRepository implements AbstractSearchedFilmsRep {
 
   SearchedFilmsRepository({required this.dio});
   @override
-  Future<List<SearchedFilms>> getFilmsList() async {
+  Future<List<SearchedFilm>> getFilmsList() async {
     try {
       String keyword = GetIt.I.get<KeywordSingleton>().keyword;
       String page = GetIt.I.get<CurrentPageSingleton>().page.toString();
@@ -33,13 +32,7 @@ class SearchedFilmsRepository implements AbstractSearchedFilmsRep {
       List<SearchedFilm> films = (data['films'] as List)
           .map((json) => SearchedFilm.fromJson(json))
           .toList();
-      List<SearchedFilms> result = [
-        SearchedFilms(
-            pagesCount: data['pagesCount'],
-            searchFilmsCountResult: data['searchFilmsCountResult'],
-            films: films)
-      ];
-      return result;
+      return films;
     } catch (e) {
       throw Error();
     }

@@ -1,5 +1,5 @@
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
-import 'package:films_app/repository/models/searched_films/searchedfilms.dart';
+import 'package:films_app/repository/models/searched_films/searchedfilm.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'searched_films_event.dart';

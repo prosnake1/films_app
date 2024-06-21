@@ -1,4 +1,4 @@
-import 'package:films_app/repository/models/searched_films/searchedfilms.dart';
+import 'package:films_app/repository/models/searched_films/searchedfilm.dart';
 import 'package:films_app/repository/models/top_films/film.dart';
 
 abstract class AbstractTopFilmsRep {
@@ -6,5 +6,5 @@ abstract class AbstractTopFilmsRep {
 }
 
 abstract class AbstractSearchedFilmsRep {
-  Future<List<SearchedFilms>> getFilmsList();
+  Future<List<SearchedFilm>> getFilmsList();
 }

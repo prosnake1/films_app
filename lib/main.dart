@@ -1,5 +1,4 @@
 import 'package:films_app/pages/pages.dart';
-import 'package:films_app/pages/search/search_page.dart';
 import 'package:films_app/repository/di/di_container.dart';
 import 'package:films_app/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +19,7 @@ class MovieApp extends StatelessWidget {
       routes: {
         '/': (context) => const HomePage(),
         '/search': (context) => const SearchPage(),
+        '/movie': (context) => const MoviePage(),
       },
     );
   }

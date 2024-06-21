@@ -18,7 +18,6 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final _searchedFilmsBloc =
       SearchedFilmsBloc(GetIt.I<AbstractSearchedFilmsRep>());
-  KeywordSingleton keywordSingleton = GetIt.I.get<KeywordSingleton>();
   CurrentPageSingleton currentPageSingleton =
       GetIt.I.get<CurrentPageSingleton>();
   final controller = TextEditingController();
@@ -41,34 +40,34 @@ class _SearchPageState extends State<SearchPage> {
             controller: controller,
             onSubmitted: (value) {
               String text = controller.text;
-              keywordSingleton.updateValue(text);
+              GetIt.I.get<KeywordSingleton>().updateValue(text);
               _searchedFilmsBloc.add(LoadFilmsList());
             },
           ),
-          Expanded(
-            child: BlocBuilder<SearchedFilmsBloc, SearchedFilmsState>(
-              bloc: _searchedFilmsBloc,
-              builder: (context, state) {
-                if (state is LoadedFilmsList) {
-                  return Expanded(
-                    child: ListView.separated(
-                      separatorBuilder: (context, index) => const Divider(),
-                      shrinkWrap: true,
-                      itemCount: state.films[0].films.length,
-                      itemBuilder: (context, i) {
-                        final film = state.films[0].films[i];
-                        return SizedBox(
-                          child: buildFilmBox(film, context),
-                        );
-                      },
-                    ),
-                  );
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
+          BlocBuilder<SearchedFilmsBloc, SearchedFilmsState>(
+            bloc: _searchedFilmsBloc,
+            builder: (context, state) {
+              if (state is LoadedFilmsList) {
+                return Expanded(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) => const Divider(),
+                    itemCount: state.films.length,
+                    itemBuilder: (context, i) {
+                      final film = state.films[i];
+                      return InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/movie');
+                        },
+                        child: buildFilmBox(film, context),
+                      );
+                    },
+                  ),
                 );
-              },
-            ),
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
           ),
           Container(
             alignment: Alignment.bottomCenter,
