@@ -27,7 +27,7 @@ class MovieApp extends StatelessWidget {
         '/search': (context) => const SearchPage(),
         '/movie': (context) => const MoviePage(),
         '/login': (context) => const LoginPage(),
-        '/sign-up': (context) => const SignUpPage(),
+        '/login/sign-up': (context) => const SignUpPage(),
       },
       initialRoute:
           FirebaseAuth.instance.currentUser == null ? '/login' : '/home',

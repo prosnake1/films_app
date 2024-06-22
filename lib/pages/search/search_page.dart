@@ -58,6 +58,9 @@ class _SearchPageState extends State<SearchPage> {
                           GetIt.I
                               .get<MovieIdSingleton>()
                               .updateValue(film.filmId);
+                          GetIt.I
+                              .get<FilmNameSingleton>()
+                              .updateValue(film.nameRu ?? '');
                           Navigator.of(context).pushNamed('/movie');
                           setState(() {});
                         },
