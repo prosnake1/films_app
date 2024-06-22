@@ -40,7 +40,7 @@ class _MoviePageState extends State<MoviePage> {
                   Container(
                     alignment: Alignment.center,
                     child: CachedNetworkImage(
-                      imageUrl: infoList.posterUrl,
+                      imageUrl: infoList.posterUrl ?? '',
                       width: MediaQuery.of(context).size.width / 2,
                     ),
                   ),
@@ -48,7 +48,7 @@ class _MoviePageState extends State<MoviePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(infoList.nameRu ?? infoList.nameOriginal,
+                      Text(infoList.nameRu ?? infoList.nameOriginal ?? '',
                           style: lightTheme.textTheme.titleLarge),
                       Card(
                         color: lightTheme.cardColor,
@@ -62,11 +62,11 @@ class _MoviePageState extends State<MoviePage> {
                   Text(infoList.year.toString(),
                       style: lightTheme.textTheme.labelLarge),
                   Text(
-                    infoList.countries.join(', ').toString(),
+                    infoList.countries!.join(', ').toString(),
                     style: lightTheme.textTheme.labelLarge,
                   ),
                   Text(
-                    infoList.genres.join(', ').toString(),
+                    infoList.genres!.join(', ').toString(),
                     style: lightTheme.textTheme.labelLarge,
                   ),
                   Padding(
