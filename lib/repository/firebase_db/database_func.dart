@@ -16,10 +16,10 @@ class DatabaseFunctions {
         {
           'filmName': GetIt.I.get<FilmNameSingleton>().filmName,
           'filmId': filmId,
-          'kinopoiskId': GetIt.I.get<MovieIdSingleton>().kinopoiskId
+          'kinopoiskId': GetIt.I.get<MovieIdSingleton>().kinopoiskId,
+          'posterUrl': GetIt.I.get<PosterSingleton>().poster,
         },
       );
-      print('film added');
       GetIt.I.get<DbMovieId>().updateValue(filmId);
       GetIt.I.get<IsAddedSingleton>().updateValue(true);
     }

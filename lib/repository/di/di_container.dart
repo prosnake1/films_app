@@ -22,4 +22,5 @@ void setup() {
   locator.registerLazySingleton<FilmNameSingleton>(() => FilmNameSingleton(''));
   locator.registerLazySingleton<DbMovieId>(() => DbMovieId());
   locator.registerLazySingleton<IsAddedSingleton>(() => IsAddedSingleton());
+  locator.registerSingleton<PosterSingleton>(PosterSingleton(''));
 }

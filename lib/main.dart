@@ -1,3 +1,4 @@
+import 'package:films_app/pages/collection/collection_page.dart';
 import 'package:films_app/pages/login/login_page.dart';
 import 'package:films_app/pages/pages.dart';
 import 'package:films_app/pages/sign_up/sign_up_page.dart';
@@ -24,10 +25,11 @@ class MovieApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/home': (context) => const HomePage(),
-        '/search': (context) => const SearchPage(),
+        '/home/search': (context) => const SearchPage(),
         '/movie': (context) => const MoviePage(),
         '/login': (context) => const LoginPage(),
         '/login/sign-up': (context) => const SignUpPage(),
+        '/home/collection': (context) => const CollectionPage(),
       },
       initialRoute:
           FirebaseAuth.instance.currentUser == null ? '/login' : '/home',

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:films_app/pages/movie/bloc/movie_info_bloc.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
-import 'package:films_app/repository/firebase_db/database_repository.dart';
+import 'package:films_app/repository/firebase_db/database_func.dart';
 import 'package:films_app/repository/singletons/singleton.dart';
 import 'package:films_app/theme/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';

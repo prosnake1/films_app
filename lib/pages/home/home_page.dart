@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/search');
+                    Navigator.of(context).pushNamed('/home/search');
                   },
                   style: lightTheme.elevatedButtonTheme.style,
                   child: const Text('Перейти к поиску'),
@@ -50,7 +50,9 @@ class _HomePageState extends State<HomePage> {
                   height: 50,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/home/collection');
+                  },
                   style: lightTheme.elevatedButtonTheme.style,
                   child: const Text('Перейти к коллекции'),
                 ),
