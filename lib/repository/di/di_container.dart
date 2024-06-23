@@ -19,5 +19,7 @@ void setup() {
   locator.registerSingleton<MovieIdSingleton>(MovieIdSingleton(0));
   locator
       .registerSingleton<AbstractMovieInfoRep>(MovieInfoRepository(dio: Dio()));
-  locator.registerSingleton<FilmNameSingleton>(FilmNameSingleton(''));
+  locator.registerLazySingleton<FilmNameSingleton>(() => FilmNameSingleton(''));
+  locator.registerLazySingleton<DbMovieId>(() => DbMovieId());
+  locator.registerLazySingleton<IsAddedSingleton>(() => IsAddedSingleton());
 }

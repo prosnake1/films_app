@@ -93,12 +93,13 @@ class _SearchPageState extends State<SearchPage> {
                           child: const Icon(Icons.chevron_left_outlined)),
                       Text(currentPageSingleton.page.toString()),
                       TextButton(
-                          onPressed: () {
-                            _searchedFilmsBloc.add(LoadFilmsList());
-                            currentPageSingleton.nextPage();
-                            setState(() {});
-                          },
-                          child: const Icon(Icons.chevron_right_outlined))
+                        onPressed: () {
+                          _searchedFilmsBloc.add(LoadFilmsList());
+                          currentPageSingleton.nextPage();
+                          setState(() {});
+                        },
+                        child: const Icon(Icons.chevron_right_outlined),
+                      )
                     ],
                   ),
                 )
