@@ -90,16 +90,18 @@ class _MoviePageState extends State<MoviePage> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          (GetIt.I.get<IsAddedSingleton>().isAdded == true)
-              ? await DatabaseRepository().removeFromCollection()
-              : await DatabaseRepository().addToCollection();
-        },
-        child: (GetIt.I.get<IsAddedSingleton>().isAdded == true)
-            ? const Icon(Icons.remove)
-            : const Icon(Icons.add),
-      ),
+      floatingActionButton: (GetIt.I.get<IsAddedSingleton>().isAdded == true)
+          ? FloatingActionButton(
+              onPressed: () async {
+                await DatabaseRepository().removeFromCollection();
+              },
+              child: const Icon(Icons.remove))
+          : FloatingActionButton(
+              onPressed: () async {
+                await DatabaseRepository().addToCollection();
+              },
+              child: const Icon(Icons.add),
+            ),
     );
   }
 }
