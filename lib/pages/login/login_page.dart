@@ -10,12 +10,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var e = t.login;
+  var a = t.log_in_alerts;
+  late final emailController = TextEditingController();
+  var passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    var e = t.login;
-    var a = t.log_in_alerts;
-    var emailController = TextEditingController();
-    var passwordController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text(e.log_in),
