@@ -1,13 +1,8 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:films_app/pages/collection/collection_page.dart';
-import 'package:films_app/pages/login/login_page.dart';
-import 'package:films_app/pages/pages.dart';
-import 'package:films_app/pages/sign_up/sign_up_page.dart';
+import 'package:films_app/app.dart';
 import 'package:films_app/repository/di/di_container.dart';
-import 'package:films_app/theme/theme.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,29 +32,4 @@ void main() async {
   }, (error, stack) {
     GetIt.I<Talker>().handle(error, stack);
   });
-}
-
-class MovieApp extends StatelessWidget {
-  const MovieApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: lightTheme,
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/home': (context) => const HomePage(),
-        '/home/search': (context) => const SearchPage(),
-        '/movie': (context) => const MoviePage(),
-        '/login': (context) => const LoginPage(),
-        '/login/sign-up': (context) => const SignUpPage(),
-        '/home/collection': (context) => const CollectionPage(),
-      },
-      navigatorObservers: [
-        TalkerRouteObserver(GetIt.I<Talker>()),
-      ],
-      initialRoute:
-          FirebaseAuth.instance.currentUser == null ? '/login' : '/home',
-    );
-  }
 }
