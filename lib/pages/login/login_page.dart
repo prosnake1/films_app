@@ -1,8 +1,6 @@
-import 'package:films_app/theme/theme.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:films_app/i18n/strings.g.dart';
+import 'package:films_app/pages/login/widgets/log_in_button.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:ndialog/ndialog.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,21 +12,19 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    var e = t.login;
+    var a = t.log_in_alerts;
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Войти'),
+        title: Text(e.log_in),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(
               height: 120,
-            ),
-            Text(
-              'Войти в аккаунт',
-              style: lightTheme.textTheme.titleLarge,
             ),
             const SizedBox(
               height: 20,
@@ -40,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: emailController,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
-                    labelText: 'e-mail',
+                    labelText: e.email,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
                   ),
@@ -56,8 +52,8 @@ class _LoginPageState extends State<LoginPage> {
                 child: TextField(
                   controller: passwordController,
                   textAlign: TextAlign.center,
-                  decoration: const InputDecoration(
-                    labelText: 'Пароль',
+                  decoration: InputDecoration(
+                    labelText: e.password,
                   ),
                 ),
               ),
@@ -68,10 +64,10 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Нет аккаунта? Тогда, '),
+                Text(e.no_account),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/sign-up');
+                    Navigator.of(context).pushNamed('/login/sign-up');
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(1),
@@ -79,8 +75,8 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
-                  child: const Text(
-                    'Зарегистрируйтесь',
+                  child: Text(
+                    e.sign_up,
                   ),
                 ),
               ],
@@ -91,55 +87,11 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               width: 180,
               height: 70,
-              child: ElevatedButton(
-                onPressed: () async {
-                  var email = emailController.text.trim();
-                  var password = passwordController.text.trim();
-                  if (email.isEmpty || password.isEmpty) {
-                    Fluttertoast.showToast(
-                        msg: 'Пожалуйста заполните все поля');
-                    return;
-                  }
-                  ProgressDialog progressDialog = ProgressDialog(context,
-                      title: const Text('Входим в аккаунт'),
-                      message: const Text('Пожалуйста подождите'),
-                      blur: 80);
-                  progressDialog.show();
-
-                  try {
-                    FirebaseAuth auth = FirebaseAuth.instance;
-
-                    UserCredential userCredential =
-                        await auth.signInWithEmailAndPassword(
-                            email: email, password: password);
-                    if (userCredential.user != null) {
-                      progressDialog.dismiss();
-                      // ignore: use_build_context_synchronously
-                      Navigator.of(context).pushNamed('/home');
-                    }
-                  } on FirebaseAuthException catch (e) {
-                    progressDialog.dismiss();
-                    if (e.code == 'user-not-found') {
-                      Fluttertoast.showToast(msg: 'Пользователь не найден');
-                    } else if (e.code == 'wrong-password') {
-                      Fluttertoast.showToast(msg: 'Неверный пароль');
-                    } else {
-                      Fluttertoast.showToast(msg: 'Что-то пошло не так...');
-                    }
-                  } catch (e) {
-                    Fluttertoast.showToast(msg: 'Что-то пошло не так...');
-                    progressDialog.dismiss();
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-                child: const Text(
-                  'Вход',
-                ),
-              ),
+              child: LogInButton(
+                  emailController: emailController,
+                  passwordController: passwordController,
+                  a: a,
+                  e: e),
             ),
           ],
         ),

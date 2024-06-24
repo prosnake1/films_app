@@ -1,0 +1,48 @@
+{
+    "language": "English",
+    "home_title": "Homepage",
+    "open_search" : "Go to search",
+    "open_collection": "Go to collection",
+    "collection": "Collection",
+    "open_button": "Go",
+    "search" : "Search",
+    "information": "Information",
+    "alert_title_logout": {
+        "title" : "Are you sure you want to log out?",
+        "action_yes": "Yes",
+        "action_no": "No"
+    },
+    "login" : {
+        "title": "Log in",
+        "email": "email",
+        "password": "Password",
+        "no_account": "No account? Then, ",
+        "log_in": "Log in",
+        "sign_up": "Sign Up"
+    },
+    "sign_up" : {
+        "title": "Sign Up",
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "confirm_pass": "Confirm Password",
+        "sign_up": "Sign Up"},
+    "sign_up_alert" : {
+        "fill_fields" : "Please fill in all fields",
+        "weak_pass": "Weak password, minimum 6 characters",
+        "pass_not_match": "Passwords do not match",
+        "signing_in": "Signing up",
+        "please_wait": "Please wait",
+        "success": "Success",
+        "failed_err": "Error",
+        "email_already_in_use_err": "Email already in use",
+        "weak_pass_err": "Password is too weak",
+        "went_wrong_err" : "Something went wrong" },
+    "log_in_alerts" : {
+        "fill_fields" : "Please fill in all fields",
+        "loggin_in" : "Logging in",
+        "please_wait" : "Please wait",
+        "user_not_found" : "User not found",
+        "wrong_pass" : "Incorrect password",
+        "went_wrong" : "Something went wrong..."}
+}

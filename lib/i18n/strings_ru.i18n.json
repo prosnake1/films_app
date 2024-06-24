@@ -1,0 +1,51 @@
+{
+    "language": "Русский",
+    "home_title": "Главная страница",
+    "open_search" : "Перейти к поиску",
+    "open_collection": "Перейти в коллекцию",
+    "collection": "Коллекция",
+    "open_button": "Перейти",
+    "search" : "Поиск",
+    "information": "Информация",
+    "alert_title_logout": {
+        "title" : "Вы уверены, что хотите выйти из аккаунта?",
+        "action_yes": "Да",
+        "action_no": "Нет"
+    },
+    "login" : {
+        "title": "Вход",
+        "email": "email",
+        "password": "Пароль",
+        "no_account": "Нет аккаунта? Тогда, ",
+        "log_in": "Войти",
+        "sign_up": "Зарегистрируйтесь"
+    },
+    "sign_up" : {
+        "title": "Регистрация",
+        "name": "Имя",
+        "email": "email",
+        "password": "Пароль",
+        "confirm_pass": "Подтвердить пароль",
+        "sign_up": "Зарегистрироваться"
+    },
+    "sign_up_alert" : {
+        "fill_fields" : "Пожалуйста, заполните все поля",
+        "weak_pass": "Слабый пароль, 6 символов минимум",
+        "pass_not_match": "Пароли не совпадают",
+        "signing_in": "Идет регистрация",
+        "please_wait": "Пожалуйста подождите",
+        "success": "Успешно",
+        "failed_err": "Ошибка",
+        "email_already_in_use_err": "Почта уже используется",
+        "weak_pass_err": "Пароль слишком слабый",
+        "went_wrong_err" : "Что-то пошло не так"
+    },
+    "log_in_alerts" : {
+        "fill_fields" : "Пожалуйста, заполните все поля",
+        "loggin_in" : "Входим в аккаунт",
+        "please_wait" : "Пожалуйста подождите",
+        "user_not_found" : "Пользователь не найден",
+        "wrong_pass" : "Неверный пароль",
+        "went_wrong" : "Что-то пошло не так..."
+    } 
+}

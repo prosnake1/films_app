@@ -1,7 +1,9 @@
+import 'package:films_app/i18n/strings.g.dart';
 import 'package:films_app/pages/home/bloc/top_films_bloc.dart';
 import 'package:films_app/pages/home/widgets/widgets.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
 import 'package:films_app/theme/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -25,6 +27,29 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(t.alert_title_logout.title),
+                    actions: [
+                      TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text(t.alert_title_logout.action_no)),
+                      TextButton(
+                          onPressed: () {
+                            FirebaseAuth.instance.signOut();
+                            Navigator.of(context).pushNamed('/login');
+                          },
+                          child: Text(t.alert_title_logout.action_yes))
+                    ],
+                  );
+                },
+              );
+            },
+            icon: const Icon(Icons.logout_outlined)),
         actions: [
           IconButton(
             onPressed: () {
@@ -40,7 +65,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
         title: Text(
-          'Главная страница',
+          t.home_title,
           style: lightTheme.textTheme.titleLarge,
         ),
       ),
@@ -59,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.of(context).pushNamed('/home/search');
                   },
                   style: lightTheme.elevatedButtonTheme.style,
-                  child: const Text('Перейти к поиску'),
+                  child: Text(t.open_search),
                 ),
                 const SizedBox(
                   height: 50,
@@ -69,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.of(context).pushNamed('/home/collection');
                   },
                   style: lightTheme.elevatedButtonTheme.style,
-                  child: const Text('Перейти к коллекции'),
+                  child: Text(t.open_collection),
                 ),
               ],
             ),
