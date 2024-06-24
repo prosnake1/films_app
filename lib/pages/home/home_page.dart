@@ -72,33 +72,7 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           FilmsColumn(topFilmsBloc: _topFilmsBloc),
-          SizedBox(
-            height: 200,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/home/search');
-                  },
-                  style: lightTheme.elevatedButtonTheme.style,
-                  child: Text(t.open_search),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/home/collection');
-                  },
-                  style: lightTheme.elevatedButtonTheme.style,
-                  child: Text(t.open_collection),
-                ),
-              ],
-            ),
-          )
+          const NavigationButtons()
         ],
       ),
     );

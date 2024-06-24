@@ -1,6 +1,7 @@
 import 'package:films_app/i18n/strings.g.dart';
-import 'package:films_app/pages/login/widgets/log_in_button.dart';
+import 'package:films_app/pages/login/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,33 +23,29 @@ class _LoginPageState extends State<LoginPage> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 120,
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 5,
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: SizedBox(
-                width: 350,
-                child: TextField(
-                  controller: emailController,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    labelText: e.email,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 1.2,
+              child: TextField(
+                controller: emailController,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  labelText: e.email,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
                 ),
               ),
             ),
-            const SizedBox(
-              height: 40,
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 18,
             ),
             Center(
               child: SizedBox(
-                width: 350,
+                width: MediaQuery.of(context).size.width / 1.2,
                 child: TextField(
                   controller: passwordController,
                   textAlign: TextAlign.center,
@@ -58,31 +55,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 100,
+            SizedBox(
+              height: MediaQuery.of(context).size.width / 15,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(e.no_account),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/login/sign-up');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(1),
-                    shape: BeveledRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                  ),
-                  child: Text(
-                    e.sign_up,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 7,
+            NoAccountWidget(e: e),
+            SizedBox(
+              height: MediaQuery.of(context).size.width / 20,
             ),
             SizedBox(
               width: 180,
