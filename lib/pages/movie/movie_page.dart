@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:films_app/pages/movie/bloc/movie_info_bloc.dart';
+import 'package:films_app/pages/movie/widgets/widgets.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
 import 'package:films_app/repository/firebase_db/database_func.dart';
 import 'package:films_app/repository/singletons/singleton.dart';
@@ -41,28 +41,9 @@ class _MoviePageState extends State<MoviePage> {
               final infoList = state.infoList[0];
               return Column(
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    child: CachedNetworkImage(
-                      imageUrl: infoList.posterUrl ?? '',
-                      width: MediaQuery.of(context).size.width / 2,
-                    ),
-                  ),
+                  PosterWidget(infoList: infoList),
                   const SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(infoList.nameRu ?? infoList.nameOriginal ?? '',
-                          style: lightTheme.textTheme.titleLarge),
-                      Card(
-                        color: lightTheme.cardColor,
-                        child: Text(
-                          infoList.ratingKinopoisk.toString(),
-                          style: lightTheme.textTheme.labelSmall,
-                        ),
-                      )
-                    ],
-                  ),
+                  buildRowTitle(infoList),
                   Text(infoList.year.toString(),
                       style: lightTheme.textTheme.labelLarge),
                   Text(
@@ -94,20 +75,28 @@ class _MoviePageState extends State<MoviePage> {
         ),
       ),
       floatingActionButton: (GetIt.I.get<IsAddedSingleton>().isAdded == true)
-          ? FloatingActionButton(
-              onPressed: () async {
-                await DatabaseFunctions().removeFromCollection();
-                setState(() {});
-              },
-              child: const Icon(Icons.remove))
-          : FloatingActionButton(
-              onPressed: () async {
-                await DatabaseFunctions().addToCollection();
-                setState(() {});
-              },
-              child: const Icon(Icons.add),
-            ),
+          ? removeFab()
+          : addFab(),
     );
+  }
+
+  FloatingActionButton addFab() {
+    return FloatingActionButton(
+      onPressed: () async {
+        await DatabaseFunctions().addToCollection();
+        setState(() {});
+      },
+      child: const Icon(Icons.add),
+    );
+  }
+
+  FloatingActionButton removeFab() {
+    return FloatingActionButton(
+        onPressed: () async {
+          await DatabaseFunctions().removeFromCollection();
+          setState(() {});
+        },
+        child: const Icon(Icons.remove));
   }
 
   Future<void> checkIfAdded() async {
