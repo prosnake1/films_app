@@ -3,7 +3,6 @@ import 'package:films_app/pages/movie/widgets/widgets.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
 import 'package:films_app/repository/firebase_db/database_func.dart';
 import 'package:films_app/repository/singletons/singleton.dart';
-import 'package:films_app/theme/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -39,33 +38,11 @@ class _MoviePageState extends State<MoviePage> {
           builder: (context, state) {
             if (state is LoadedInfoList) {
               final infoList = state.infoList[0];
-              return Column(
-                children: [
-                  PosterWidget(infoList: infoList),
-                  const SizedBox(height: 15),
-                  buildRowTitle(infoList),
-                  Text(infoList.year.toString(),
-                      style: lightTheme.textTheme.labelLarge),
-                  Text(
-                    infoList.countries!.join(', ').toString(),
-                    style: lightTheme.textTheme.labelLarge,
-                  ),
-                  Text(
-                    infoList.genres!.join(', ').toString(),
-                    style: lightTheme.textTheme.labelLarge,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Text(
-                          infoList.description ?? '',
-                          style: lightTheme.textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+              return buildFilmScreen(infoList);
+            }
+            if (state is InfoListLoadingFailure) {
+              return Center(
+                child: FailedLoadingWidget(filmInfoBloc: _filmInfoBloc),
               );
             }
             return const Center(

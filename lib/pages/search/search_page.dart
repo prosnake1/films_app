@@ -1,5 +1,6 @@
-import 'package:films_app/pages/search/widgets/film_box.dart';
+import 'package:films_app/pages/search/widgets/widgets.dart';
 import 'package:films_app/repository/abstracts/abstracts_repository.dart';
+import 'package:films_app/repository/models/searched_films/searchedfilm.dart';
 import 'package:films_app/repository/singletons/singleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,25 +56,13 @@ class _SearchPageState extends State<SearchPage> {
                     itemCount: state.films.length,
                     itemBuilder: (context, i) {
                       final film = state.films[i];
-                      return InkWell(
-                        onTap: () {
-                          GetIt.I
-                              .get<MovieIdSingleton>()
-                              .updateValue(film.filmId);
-                          GetIt.I
-                              .get<FilmNameSingleton>()
-                              .updateValue(film.nameRu ?? '');
-                          GetIt.I
-                              .get<PosterSingleton>()
-                              .updateValue(film.posterUrl);
-                          Navigator.of(context).pushNamed('/movie');
-                          setState(() {});
-                        },
-                        child: buildFilmBox(film, context),
-                      );
+                      return buildFilmButton(film, context);
                     },
                   ),
                 );
+              }
+              if (state is FilmsListLoadingFailure) {
+                return ReloadWidget(searchedFilmsBloc: _searchedFilmsBloc);
               }
               return const Center(
                 child: CircularProgressIndicator(),
@@ -90,6 +79,19 @@ class _SearchPageState extends State<SearchPage> {
                 )
         ],
       ),
+    );
+  }
+
+  InkWell buildFilmButton(SearchedFilm film, BuildContext context) {
+    return InkWell(
+      onTap: () {
+        GetIt.I.get<MovieIdSingleton>().updateValue(film.filmId);
+        GetIt.I.get<FilmNameSingleton>().updateValue(film.nameRu ?? '');
+        GetIt.I.get<PosterSingleton>().updateValue(film.posterUrl);
+        Navigator.of(context).pushNamed('/movie');
+        setState(() {});
+      },
+      child: buildFilmBox(film, context),
     );
   }
 

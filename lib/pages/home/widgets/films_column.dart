@@ -63,6 +63,24 @@ class FilmsColumn extends StatelessWidget {
             ),
           );
         }
+        if (state is FilmsListLoadingFailure) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height / 1.5,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Что-то пошло не так...'),
+                  TextButton(
+                      onPressed: () {
+                        _topFilmsBloc.add(LoadFilmsEvent());
+                      },
+                      child: const Text('Повторить'))
+                ],
+              ),
+            ),
+          );
+        }
         return const Center(
           child: CircularProgressIndicator(),
         );
