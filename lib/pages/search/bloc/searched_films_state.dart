@@ -8,3 +8,9 @@ class LoadedFilmsList extends SearchedFilmsState {
   LoadedFilmsList({required this.films});
   final List<SearchedFilm> films;
 }
+
+class FilmsListLoadingFailure extends SearchedFilmsState {
+  final Object? exception;
+
+  FilmsListLoadingFailure({required this.exception});
+}

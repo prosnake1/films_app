@@ -40,7 +40,9 @@ class _SearchPageState extends State<SearchPage> {
             onSubmitted: (value) {
               String text = controller.text;
               GetIt.I.get<KeywordSingleton>().updateValue(text);
+              GetIt.I.get<CurrentPageSingleton>().updateValue(1);
               _searchedFilmsBloc.add(LoadFilmsList());
+              setState(() {});
             },
           ),
           BlocBuilder<SearchedFilmsBloc, SearchedFilmsState>(

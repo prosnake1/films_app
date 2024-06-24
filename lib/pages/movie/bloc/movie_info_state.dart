@@ -8,3 +8,9 @@ class LoadedInfoList extends MovieInfoState {
   LoadedInfoList({required this.infoList});
   final List<MovieInfo> infoList;
 }
+
+class InfoListLoadingFailure extends MovieInfoState {
+  final Object? exception;
+
+  InfoListLoadingFailure({required this.exception});
+}

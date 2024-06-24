@@ -4,6 +4,7 @@ import 'package:films_app/repository/abstracts/abstracts_repository.dart';
 import 'package:films_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,6 +25,20 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => TalkerScreen(
+                    talker: GetIt.I<Talker>(),
+                  ),
+                ),
+              );
+            },
+            icon: const Icon(Icons.document_scanner_outlined),
+          )
+        ],
         title: Text(
           'Главная страница',
           style: lightTheme.textTheme.titleLarge,

@@ -46,7 +46,9 @@ dependencies:
   firebase_storage: ^11.7.4
   fluttertoast: ^8.0.8
   ndialog: ^4.1.0
-  
+  talker_flutter: ^4.2.4
+  talker_dio_logger: ^4.2.4
+  talker_bloc_logger: ^4.2.4
 
 dev_dependencies:
   flutter_test:

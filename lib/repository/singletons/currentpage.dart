@@ -5,6 +5,10 @@ var pagesCount = GetIt.I.get<PagesCountSingleton>().pagesCount;
 
 class CurrentPageSingleton {
   int page;
+  void updateValue(int value) {
+    page = value;
+  }
+
   void nextPage() {
     if (page < pagesCount && page != 0) {
       page++;
