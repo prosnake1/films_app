@@ -10,7 +10,7 @@ class NavigationButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: MediaQuery.of(context).size.height / 4.5,
       child: Column(
         children: [
           const SizedBox(
@@ -23,8 +23,8 @@ class NavigationButtons extends StatelessWidget {
             style: lightTheme.elevatedButtonTheme.style,
             child: Text(t.open_search),
           ),
-          const SizedBox(
-            height: 50,
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 20,
           ),
           ElevatedButton(
             onPressed: () {

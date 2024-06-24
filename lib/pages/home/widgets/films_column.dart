@@ -21,7 +21,7 @@ class FilmsColumn extends StatelessWidget {
           return Expanded(
             child: ListView.separated(
               separatorBuilder: (context, index) => const Divider(
-                height: 30,
+                height: 20,
               ),
               itemCount: state.filmsList.length,
               shrinkWrap: true,

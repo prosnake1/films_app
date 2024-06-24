@@ -85,31 +85,35 @@ class _SearchPageState extends State<SearchPage> {
               : Container(
                   alignment: Alignment.bottomCenter,
                   color: Colors.grey.shade300,
-                  height: 50,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                          onPressed: () {
-                            _searchedFilmsBloc.add(LoadFilmsList());
-                            currentPageSingleton.previousPage();
-                            setState(() {});
-                          },
-                          child: const Icon(Icons.chevron_left_outlined)),
-                      Text(currentPageSingleton.page.toString()),
-                      TextButton(
-                        onPressed: () {
-                          _searchedFilmsBloc.add(LoadFilmsList());
-                          currentPageSingleton.nextPage();
-                          setState(() {});
-                        },
-                        child: const Icon(Icons.chevron_right_outlined),
-                      )
-                    ],
-                  ),
+                  height: MediaQuery.of(context).size.height / 20,
+                  child: changePage(),
                 )
         ],
       ),
+    );
+  }
+
+  Row changePage() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextButton(
+            onPressed: () {
+              _searchedFilmsBloc.add(LoadFilmsList());
+              currentPageSingleton.previousPage();
+              setState(() {});
+            },
+            child: const Icon(Icons.chevron_left_outlined)),
+        Text(currentPageSingleton.page.toString()),
+        TextButton(
+          onPressed: () {
+            _searchedFilmsBloc.add(LoadFilmsList());
+            currentPageSingleton.nextPage();
+            setState(() {});
+          },
+          child: const Icon(Icons.chevron_right_outlined),
+        )
+      ],
     );
   }
 }

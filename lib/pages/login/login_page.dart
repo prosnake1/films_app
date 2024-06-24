@@ -1,7 +1,6 @@
 import 'package:films_app/i18n/strings.g.dart';
 import 'package:films_app/pages/login/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -63,8 +62,8 @@ class _LoginPageState extends State<LoginPage> {
               height: MediaQuery.of(context).size.width / 20,
             ),
             SizedBox(
-              width: 180,
-              height: 70,
+              width: MediaQuery.of(context).size.width / 2.5,
+              height: MediaQuery.of(context).size.height / 13,
               child: LogInButton(
                   emailController: emailController,
                   passwordController: passwordController,
